@@ -49,7 +49,7 @@
                     <a href="catalog.html" class="btn btn-primary">Выбрать экскурсию</a>
                 </div>
                 <div class="hero-image">
-                    <img src="обзор.avif" 
+                    <img src="общая.webp" 
                          alt="Санкт-Петербург" 
                          style="width:100%; max-width:500px; border-radius:20px; box-shadow: 0 12px 40px var(--shadow-color); object-fit:cover; aspect-ratio:4/3;"
                          onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\\'hero-placeholder\\'>✦</div>'">
@@ -89,7 +89,79 @@
             <div class="container">
                 <h2 class="section-title">Популярные экскурсии</h2>
                 <div class="catalog-grid" id="featuredGrid">
-                    <!-- Карточки будут добавлены динамически из script.js -->
+                    
+                    <!-- ========================================== -->
+                    <!-- КАРТОЧКИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ (4 ШТУКИ)   -->
+                    <!-- ========================================== -->
+
+                    <!-- КАРТОЧКА 1 -->
+                    <div class="tour-card">
+                        <div class="tour-image">
+                            <img src="обзор.avif" alt="Обзорная экскурсия" 
+                                 style="width:100%; height:100%; object-fit:cover;"
+                                 onerror="this.style.display='none'; this.parentNode.innerHTML='✦'">
+                        </div>
+                        <div class="tour-content">
+                            <h3 class="tour-title">Обзорная экскурсия по городу</h3>
+                            <p class="tour-desc">Все главные достопримечательности Петербурга с остановками для фото.</p>
+                            <div class="tour-meta">
+                                <span class="tour-price">11 000 ₽</span>
+                                <span class="tour-category">Городские</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- КАРТОЧКА 2 -->
+                    <div class="tour-card">
+                        <div class="tour-image">
+                            <img src="Эрмитаж.jpg" alt="Эрмитаж" 
+                                 style="width:100%; height:100%; object-fit:cover;"
+                                 onerror="this.style.display='none'; this.parentNode.innerHTML='✦'">
+                        </div>
+                        <div class="tour-content">
+                            <h3 class="tour-title">Эрмитаж: шедевры мирового искусства</h3>
+                            <p class="tour-desc">История главной императорской резиденции и её коллекций.</p>
+                            <div class="tour-meta">
+                                <span class="tour-price">8 000 ₽</span>
+                                <span class="tour-category">Музеи</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- КАРТОЧКА 3 -->
+                    <div class="tour-card">
+                        <div class="tour-image">
+                            <img src="Ночной.webp" alt="Ночной Петербург" 
+                                 style="width:100%; height:100%; object-fit:cover;"
+                                 onerror="this.style.display='none'; this.parentNode.innerHTML='✦'">
+                        </div>
+                        <div class="tour-content">
+                            <h3 class="tour-title">Ночной Петербург на катере</h3>
+                            <p class="tour-desc">Романтическая прогулка по рекам и каналам с видами разводных мостов.</p>
+                            <div class="tour-meta">
+                                <span class="tour-price">6 500 ₽/час</span>
+                                <span class="tour-category">Водные</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- КАРТОЧКА 4 -->
+                    <div class="tour-card">
+                        <div class="tour-image">
+                            <img src="Петергоф.webp" alt="Петергоф" 
+                                 style="width:100%; height:100%; object-fit:cover;"
+                                 onerror="this.style.display='none'; this.parentNode.innerHTML='✦'">
+                        </div>
+                        <div class="tour-content">
+                            <h3 class="tour-title">Петергоф: фонтаны и парки</h3>
+                            <p class="tour-desc">Мировой шедевр дворцово-паркового искусства. Большой каскад и фонтаны.</p>
+                            <div class="tour-meta">
+                                <span class="tour-price">16 000 ₽</span>
+                                <span class="tour-category">Пригороды</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="text-center">
                     <a href="catalog.html" class="btn btn-secondary">Смотреть все экскурсии</a>
