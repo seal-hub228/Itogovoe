@@ -1,125 +1,3 @@
-// ========== DATA С ЛОКАЛЬНЫМИ ФОТОГРАФИЯМИ ==========
-const toursData = [
-    {
-        id: 1,
-        title: 'Обзорная экскурсия по городу',
-        desc: 'Все главные достопримечательности Петербурга с остановками для фото. Исаакиевский собор, Медный всадник, Дворцовая площадь.',
-        price: '11 000 ₽',
-        category: 'Городские',
-        image: 'images/обзор.avif'
-    },
-    {
-        id: 2,
-        title: 'Эрмитаж: шедевры мирового искусства',
-        desc: 'История главной императорской резиденции и её коллекций. Зимний дворец, картины Да Винчи, Рембрандта и Тициана.',
-        price: '8 000 ₽',
-        category: 'Музеи',
-        image: 'images/Эрмитаж.jpg'
-    },
-    {
-        id: 3,
-        title: 'Ночной Петербург на катере',
-        desc: 'Романтическая прогулка по рекам и каналам с видами разводных мостов. Дворцовая набережная, Стрелка Васильевского острова.',
-        price: '6 500 ₽/час',
-        category: 'Водные',
-        image: 'images/Ночной.webp'
-    },
-    {
-        id: 4,
-        title: 'Петергоф: фонтаны и парки',
-        desc: 'Мировой шедевр дворцово-паркового искусства. Большой каскад, Самсон, Нижний парк с фонтанами.',
-        price: '16 000 ₽',
-        category: 'Пригороды',
-        image: 'images/Петергоф.webp'
-    },
-    {
-        id: 5,
-        title: 'Царское Село (Пушкин)',
-        desc: 'Екатерининский дворец, Янтарная комната, Екатерининский парк с павильонами и прудами.',
-        price: '16 000 ₽',
-        category: 'Пригороды',
-        image: 'images/Царское.webp'
-    },
-    {
-        id: 6,
-        title: 'Кронштадт: город-крепость',
-        desc: 'Путешествие на остров Котлин. Морской собор, форты, военно-морская слава России.',
-        price: '16 000 ₽',
-        category: 'Пригороды',
-        image: 'images/i.webp'
-    },
-];
-
-function createTourCard(tour) {
-    const card = document.createElement('div');
-    card.className = 'tour-card';
-    card.dataset.id = tour.id;
-    card.innerHTML = `
-        <div class="tour-image">
-            <img src="${tour.image}" alt="${tour.title}" loading="lazy" 
-                 style="width:100%; height:100%; object-fit:cover;" 
-                 onerror="this.style.display='none'; this.parentNode.innerHTML='✦'">
-        </div>
-        <div class="tour-content">
-            <h3 class="tour-title">${tour.title}</h3>
-            <p class="tour-desc">${tour.desc}</p>
-            <div class="tour-meta">
-                <span class="tour-price">${tour.price}</span>
-                <span class="tour-category">${tour.category}</span>
-            </div>
-        </div>
-    `;
-    return card;
-}
-
-// ========== CATALOG LOGIC ==========
-let currentCount = 0;
-const loadStep = 2;
-let catalogContainer = document.getElementById('catalogGrid');
-let loadMoreBtn = document.getElementById('loadMoreBtn');
-
-function renderCatalog(container, data, count) {
-    const itemsToShow = data.slice(0, count);
-    container.innerHTML = '';
-    itemsToShow.forEach(tour => {
-        container.appendChild(createTourCard(tour));
-    });
-}
-
-function loadMore() {
-    if (!catalogContainer) return;
-    const total = toursData.length;
-    const nextCount = Math.min(currentCount + loadStep, total);
-    renderCatalog(catalogContainer, toursData, nextCount);
-    currentCount = nextCount;
-    if (loadMoreBtn && currentCount >= total) {
-        loadMoreBtn.style.display = 'none';
-    }
-}
-
-function initCatalog() {
-    if (catalogContainer) {
-        currentCount = Math.min(loadStep, toursData.length);
-        renderCatalog(catalogContainer, toursData, currentCount);
-        if (loadMoreBtn) {
-            loadMoreBtn.addEventListener('click', loadMore);
-            if (currentCount >= toursData.length) {
-                loadMoreBtn.style.display = 'none';
-            }
-        }
-    }
-}
-
-function initFeatured() {
-    const featuredGrid = document.getElementById('featuredGrid');
-    if (!featuredGrid) return;
-    const featuredCount = 4;
-    const featuredData = toursData.slice(0, featuredCount);
-    featuredData.forEach(tour => {
-        featuredGrid.appendChild(createTourCard(tour));
-    });
-}
-
 // ========== THEME TOGGLE ==========
 const themeToggleBtn = document.getElementById('themeToggle');
 const themeIcon = themeToggleBtn?.querySelector('.theme-icon');
@@ -251,22 +129,34 @@ document.addEventListener('DOMContentLoaded', function() {
         setTheme('dark');
     }
 
-    initCatalog();
-    initFeatured();
     animateCounters();
 
-    document.querySelectorAll('.tour-image img').forEach(img => {
+    // Обработка ошибок для всех изображений
+    document.querySelectorAll('.tour-image img, .hero-image img, .about-image img, .team-photo img').forEach(img => {
         img.onerror = function() {
             this.style.display = 'none';
-            const placeholder = document.createElement('span');
-            placeholder.textContent = '✦';
-            placeholder.style.fontSize = '3rem';
-            placeholder.style.color = 'var(--accent-color)';
-            placeholder.style.display = 'flex';
-            placeholder.style.alignItems = 'center';
-            placeholder.style.justifyContent = 'center';
-            placeholder.style.height = '100%';
-            this.parentNode.appendChild(placeholder);
+            const parent = this.parentNode;
+            if (parent) {
+                if (parent.classList.contains('tour-image') || parent.classList.contains('hero-image') || parent.classList.contains('about-image')) {
+                    const placeholder = document.createElement('div');
+                    placeholder.textContent = '✦';
+                    placeholder.style.fontSize = '3rem';
+                    placeholder.style.color = 'var(--accent-color)';
+                    placeholder.style.display = 'flex';
+                    placeholder.style.alignItems = 'center';
+                    placeholder.style.justifyContent = 'center';
+                    placeholder.style.height = '100%';
+                    placeholder.style.width = '100%';
+                    parent.appendChild(placeholder);
+                } else if (parent.classList.contains('team-photo')) {
+                    parent.textContent = '✦';
+                    parent.style.fontSize = '2.8rem';
+                    parent.style.color = 'var(--accent-color)';
+                    parent.style.display = 'flex';
+                    parent.style.alignItems = 'center';
+                    parent.style.justifyContent = 'center';
+                }
+            }
         };
     });
 });
